@@ -39,6 +39,8 @@ def check_tip(tip: str) -> str:
     bad = [c for c in tip if ord(c) < 0x20 and c != "\t"]
     if bad:
         raise ValueError(f"tip holds control characters: {bad!r}")
+    if "http://" in tip or "https://" in tip or "www." in tip:
+        raise ValueError("tip must not carry a link: a loading screen has no clicks")
     return tip
 
 
